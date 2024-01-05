@@ -1,0 +1,7 @@
+package com.Demo.request;
+
+import org.springframework.data.domain.Sort;
+
+public class CustomPageRequest extends PageRequest{
+	
+}

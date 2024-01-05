@@ -1,0 +1,67 @@
+package com.Demo.serviceImpl;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.stereotype.Service;
+
+import com.Demo.entites.Test;
+import com.Demo.repos.TestRepo;
+import com.Demo.service.TestService;
+
+@Service
+public class TestServiceImpl implements TestService {
+
+	@Autowired
+	private TestRepo testRepo;
+
+	@Override
+	public List<Test> getAllTest() {
+		return testRepo.findAll();
+	}
+
+	@Override
+	public void saveTest(Test test) {
+		this.testRepo.save(test);
+	}
+
+	@Override
+	public Test getTestById(int id) {
+		Optional<Test> optional = testRepo.findById(id);
+		Test test = null;
+		if (optional.isPresent()) {
+			test = optional.get();
+		} else {
+			throw new RuntimeException("Test not found for id :: " + id);
+
+		}
+		return test;
+	}
+
+	@Override
+	public void deleteTestById(int id) {
+		this.testRepo.deleteById(id);
+
+	}
+
+	@Override
+	public List<Test> findByFilter(Test test) {
+
+		ExampleMatcher matcher = ExampleMatcher.matchingAny().withIgnoreCase()
+				.withMatcher("name", ExampleMatcher.GenericPropertyMatchers.contains())
+				.withMatcher("category", ExampleMatcher.GenericPropertyMatchers.contains())
+				.withMatcher("messagest", ExampleMatcher.GenericPropertyMatchers.contains())
+				.withMatcher("timestamp", ExampleMatcher.GenericPropertyMatchers.contains())
+				.withMatcher("action", ExampleMatcher.GenericPropertyMatchers.contains())
+				.withMatcher("status", ExampleMatcher.GenericPropertyMatchers.contains())
+				.withMatcher("id", ExampleMatcher.GenericPropertyMatchers.contains());
+
+		Example<Test> ex = Example.of(test, matcher);
+		return this.testRepo.findAll(ex);
+
+	}
+
+}

@@ -1,0 +1,20 @@
+package com.Demo.request;
+
+import org.springframework.data.domain.Sort;
+
+public class CustomPageRequest extends PageRequest{
+	private final String sortBy;
+
+    public CustomPageRequest(int page, int size, Sort sort, String sortBy) {
+        super(page, size, sort);
+        this.sortBy = sortBy;
+    }
+
+    public static CustomPageRequest of(int page, int size, String sortBy) {
+        return new CustomPageRequest(page, size, Sort.unsorted(), sortBy);
+    }
+
+    public String getSortBy() {
+        return sortBy;
+    }
+}

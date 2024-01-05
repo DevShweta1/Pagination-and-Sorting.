@@ -1,0 +1,86 @@
+package com.Demo.controller;
+
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.Demo.entites.Test;
+import com.Demo.service.TestService;
+
+@RestController
+@RequestMapping("/tests")
+public class TestController {
+
+	@Autowired
+	private TestService testService;
+
+	@GetMapping("/")
+	public String viewHomePage(Model model) {
+		return findPaginated(1, "Name", "asc", model);
+	}
+
+	@GetMapping("/showNewTestForm")
+	public String showNewTestForm(Model model) {
+		Test test = new Test();
+		model.addAttribute("test", test);
+		return "new_test";
+	}
+
+	@PostMapping("/saveTest")
+	public String saveTest(@ModelAttribute("test") Test test) {
+		testService.saveTest(test);
+		return "redirect:/";
+	}
+
+	@GetMapping("/showFormForUpdate/{id}")
+	public String showFormForUpdate(@PathVariable(value = "id") int id, Model model) {
+		Test test = testService.getTestById(id);
+		model.addAttribute("test", test);
+		return "update_test";
+	}
+
+	@GetMapping("/deleteTest/{id}")
+	public String deleteTest(@PathVariable (value = "id") int id) {
+		
+		// call delete employee method 
+		this.testService.deleteTestById(id);
+		return "redirect:/";
+	}
+	
+	public String findPaginated(@PathVariable (value="pageNo")int pageNo,
+			@RequestParam("sortField") String sortField,
+			@RequestParam("sortDir") String sortDir,
+			Model model) {
+		int pageSize = 5;
+		Page<Test> page = testService.findPaginated(pageNo, pageSize, sortField, sortDir);
+		List<Test> listEmployees = page.getContent();
+		
+		model.addAttribute("currentPage", pageNo);
+		model.addAttribute("totalPages", page.getTotalPages());
+		model.addAttribute("totalItems", page.getTotalElements());
+		
+		model.addAttribute("sortField", sortField);
+		model.addAttribute("sortDir", sortDir);
+		model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+		
+		model.addAttribute("list", listEmployees);
+		return "index";
+	}
+}
+			
+	
+	
+	
+	
+	
+	
+

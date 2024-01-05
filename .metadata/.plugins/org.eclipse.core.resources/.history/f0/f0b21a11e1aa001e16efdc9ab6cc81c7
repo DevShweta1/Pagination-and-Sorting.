@@ -1,0 +1,29 @@
+package com.Demo.service;
+
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
+
+import com.Demo.entites.Test;
+import com.Demo.request.PageRequest;
+
+public interface TestService {
+	List<Test> getAllTest();
+
+	void saveTest(Test test);
+
+	Test getTestById(int id);
+
+	void deleteTestById(int id);
+
+	List<Test> findByFilter(Test test);
+
+	Page<Test> getByPageable(String test, Pageable pageable);
+
+	Page<Test> findPaginated(int page, int elementsPerPage);
+
+	ResponseEntity<Test> testGet(PageRequest pageRequest);
+
+}

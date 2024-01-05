@@ -1,0 +1,93 @@
+package com.Demo.response;
+
+public class PageResponse {
+
+	private int Id;
+	private String Name;
+	private String Category;
+	private String Messages;
+	private String Timestamp;
+	private String Action;
+	private String Status;
+	
+	public PageResponse() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public PageResponse(int id, String name, String category, String messages, String timestamp, String action,
+			String status) {
+		super();
+		Id = id;
+		Name = name;
+		Category = category;
+		Messages = messages;
+		Timestamp = timestamp;
+		Action = action;
+		Status = status;
+	}
+
+	public PageResponse(int number, int size, int totalPages, long totalElements, boolean last, boolean first) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public int getId() {
+		return Id;
+	}
+
+	public void setId(int id) {
+		Id = id;
+	}
+
+	public String getName() {
+		return Name;
+	}
+
+	public void setName(String name) {
+		Name = name;
+	}
+
+	public String getCategory() {
+		return Category;
+	}
+
+	public void setCategory(String category) {
+		Category = category;
+	}
+
+	public String getMessages() {
+		return Messages;
+	}
+
+	public void setMessages(String messages) {
+		Messages = messages;
+	}
+
+	public String getTimestamp() {
+		return Timestamp;
+	}
+
+	public void setTimestamp(String timestamp) {
+		Timestamp = timestamp;
+	}
+
+	public String getAction() {
+		return Action;
+	}
+
+	public void setAction(String action) {
+		Action = action;
+	}
+
+	public String getStatus() {
+		return Status;
+	}
+
+	public void setStatus(String status) {
+		Status = status;
+	}
+	
+	
+	
+	
+}

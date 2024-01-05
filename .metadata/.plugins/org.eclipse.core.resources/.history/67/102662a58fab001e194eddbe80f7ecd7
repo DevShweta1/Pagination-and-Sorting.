@@ -1,0 +1,47 @@
+package com.Demo.dto;
+
+import java.util.List;
+
+import com.Demo.entites.Test;
+
+public class TestPage {
+
+	private List<Test>testList;
+	private int totalPages;
+	private int totalElements;
+	
+	public TestPage() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public TestPage(List<Test> testList, int totalPages, int totalElements) {
+		super();
+		this.testList = testList;
+		this.totalPages = totalPages;
+		this.totalElements = totalElements;
+	}
+
+	public List<Test> getTestList() {
+		return testList;
+	}
+
+	public void setTestList(List<Test> testList) {
+		this.testList = testList;
+	}
+
+	public int getTotalPages() {
+		return totalPages;
+	}
+
+	public void setTotalPages(int totalPages) {
+		this.totalPages = totalPages;
+	}
+
+	public int getTotalElements() {
+		return totalElements;
+	}
+
+	
+	
+}

@@ -1,0 +1,5 @@
+package com.Demo.exception;
+
+public class CustomException {
+
+}

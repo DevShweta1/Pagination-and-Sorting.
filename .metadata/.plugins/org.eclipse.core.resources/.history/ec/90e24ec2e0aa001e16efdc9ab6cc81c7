@@ -1,0 +1,17 @@
+package com.Demo.repos;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.Demo.entites.Test;
+@Repository
+public interface TestRepo extends JpaRepository<Test, Integer>{
+
+	
+	public Page<Test> queryFirst3ByTest(String test, Pageable pageable);
+
+	public Page<Test> search(Object search, Pageable p);
+
+}

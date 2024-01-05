@@ -1,0 +1,22 @@
+package com.Demo.service;
+
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import com.Demo.entites.Test;
+
+public interface TestService {
+	List<Test> getAllTest();
+
+	void saveTest(Test test);
+
+	Test getTestById(int id);
+
+	void deleteTestById(int id);
+
+	public List<Test> findByFilter(Test test);
+
+	Page<Test> getTestById(String district, Pageable pageable);
+}

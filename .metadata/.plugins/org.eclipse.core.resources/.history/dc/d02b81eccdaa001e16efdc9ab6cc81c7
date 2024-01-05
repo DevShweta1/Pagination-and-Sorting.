@@ -1,0 +1,112 @@
+package com.Demo.serviceImpl;
+
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.Demo.entites.Test;
+import com.Demo.repos.TestRepo;
+import com.Demo.service.TestService;
+
+@Service
+public class TestServiceImpl implements TestService {
+
+	@Autowired
+	private TestRepo testRepo;
+
+	@Override
+	public List<Test> getAllTest() {
+		return testRepo.findAll();
+	}
+
+	@Override
+	public void saveTest(Test test) {
+		this.testRepo.save(test);
+	}
+
+	@Override
+	public Test getTestById(int id) {
+		Optional<Test> optional = testRepo.findById(id);
+		Test test = null;
+		if (optional.isPresent()) {
+			test = optional.get();
+		} else {
+			throw new RuntimeException("Test not found for id :: " + id);
+
+		}
+		return test;
+	}
+
+	@Override
+	public void deleteTestById(int id) {
+		this.testRepo.deleteById(id);
+
+	}
+
+	@Override
+	public Page<Test> findPaginated(int page, int elementsPerPage) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public ResponseEntity<GeneralResponse> userGet(PaginationRequest paginationRequest) {
+		
+		if (!paginationRequest.getSortBy().equals("email") && !paginationRequest.getSortBy().equals("role")
+				&& !paginationRequest.getSortBy().equals("id")
+				&& !paginationRequest.getSortBy().equals("first_name")
+				&& !paginationRequest.getSortBy().equals("last_name")) {
+			throw new InvalidProperty(ConstantsMessage.VALID_PROPERTY_SORT_BY);
+		}
+		
+		try 
+		{
+			Page<UserEntity> pageUser =null;
+			
+			Pageable p = PageRequest.of(paginationRequest.getPageNumber(), paginationRequest.getPageSize(),Sort.by(paginationRequest.getSortBy()));
+			
+			if(paginationRequest.getSearch()==null)		
+			{
+				pageUser = userRepository.findAll(p);	
+			}
+			else
+			{
+			pageUser = userRepository.search(paginationRequest.getSearch(), p); 
+			}
+			
+			List<UserEntity> userEntityList = pageUser.getContent();
+			
+			PaginationResponse paginationResponse = new PaginationResponse(pageUser.getNumber(), pageUser.getSize(),pageUser.getTotalPages(), pageUser.getTotalElements(), pageUser.isLast(), pageUser.isFirst());
+			
+				log.info("user get service  method called" );
+				
+				List list=new ArrayList<>();
+				list.add(paginationResponse);
+				list.add(userEntityList);
+				
+			return new ResponseEntity<GeneralResponse>(new GeneralResponse(ConstantsMessage.FOUND_SUCCESSFULLY,list),HttpStatus.FOUND);
+		}
+		catch (Exception e)
+		{
+			log.info(" error in side the user get service method ");
+			log.error(e.getLocalizedMessage());
+			
+			throw new InternalException(ConstantsMessage.INTERNAL_EXCEPTION_MESSAGE);	
+		}
+		
+		}
+
+	
+}

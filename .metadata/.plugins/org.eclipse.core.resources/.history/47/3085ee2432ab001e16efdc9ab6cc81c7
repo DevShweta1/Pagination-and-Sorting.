@@ -1,0 +1,7 @@
+package com.Demo.request;
+
+public @interface Min {
+
+	int value();
+
+}

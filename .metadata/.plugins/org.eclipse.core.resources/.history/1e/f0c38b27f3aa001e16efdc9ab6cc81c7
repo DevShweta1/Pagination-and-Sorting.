@@ -1,0 +1,118 @@
+package com.Demo.request;
+
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+
+public class PageRequest {
+
+	private int Id;
+	private String Name;
+	private String Category;
+	private String Messages;
+	private String Timestamp;
+	private String Action;
+	private String Status;
+
+	public PageRequest() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public PageRequest(int id, String name, String category, String messages, String timestamp, String action,
+			String status) {
+		super();
+		Id = id;
+		Name = name;
+		Category = category;
+		Messages = messages;
+		Timestamp = timestamp;
+		Action = action;
+		Status = status;
+	}
+
+	public PageRequest(int page, int size, Sort sort) {
+		// TODO Auto-generated constructor stub
+	}
+
+	public int getId() {
+		return Id;
+	}
+
+	public void setId(int id) {
+		Id = id;
+	}
+
+	public String getName() {
+		return Name;
+	}
+
+	public void setName(String name) {
+		Name = name;
+	}
+
+	public String getCategory() {
+		return Category;
+	}
+
+	public void setCategory(String category) {
+		Category = category;
+	}
+
+	public String getMessages() {
+		return Messages;
+	}
+
+	public void setMessages(String messages) {
+		Messages = messages;
+	}
+
+	public String getTimestamp() {
+		return Timestamp;
+	}
+
+	public void setTimestamp(String timestamp) {
+		Timestamp = timestamp;
+	}
+
+	public String getAction() {
+		return Action;
+	}
+
+	public void setAction(String action) {
+		Action = action;
+	}
+
+	public String getStatus() {
+		return Status;
+	}
+
+	public void setStatus(String status) {
+		Status = status;
+	}
+/////////////////////////////////////////////////////////
+	public String[] getSortBy() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object getPageNumber() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object getPageSize() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static Object getSearch() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static Pageable of(Object pageNumber, Object pageSize, Sort by) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

@@ -1,0 +1,9 @@
+package com.Demo.repos;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.Demo.entites.Test;
+
+public interface TestRepo extends JpaRepository<Test, Integer>{
+
+}

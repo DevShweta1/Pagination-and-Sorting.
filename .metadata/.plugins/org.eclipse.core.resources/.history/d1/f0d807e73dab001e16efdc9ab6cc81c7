@@ -1,0 +1,92 @@
+package com.Demo.entites;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
+public class Test {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int Id;
+	private String name;
+	private String category;
+	private String messages;
+	private String timestamp;
+	private String action;
+	private String status;
+
+	public Test() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Test(int id, String name, String category, String messages, String timestamp, String action, String status) {
+		super();
+		Id = id;
+		Name = name;
+		Category = category;
+		Messages = messages;
+		Timestamp = timestamp;
+		Action = action;
+		Status = status;
+	}
+
+	public int getId() {
+		return Id;
+	}
+
+	public void setId(int id) {
+		Id = id;
+	}
+
+	public String getName() {
+		return Name;
+	}
+
+	public void setName(String name) {
+		Name = name;
+	}
+
+	public String getCategory() {
+		return Category;
+	}
+
+	public void setCategory(String category) {
+		Category = category;
+	}
+
+	public String getMessages() {
+		return Messages;
+	}
+
+	public void setMessages(String messages) {
+		Messages = messages;
+	}
+
+	public String getTimestamp() {
+		return Timestamp;
+	}
+
+	public void setTimestamp(String timestamp) {
+		Timestamp = timestamp;
+	}
+
+	public String getAction() {
+		return Action;
+	}
+
+	public void setAction(String action) {
+		Action = action;
+	}
+
+	public String getStatus() {
+		return Status;
+	}
+
+	public void setStatus(String status) {
+		Status = status;
+	}
+
+}

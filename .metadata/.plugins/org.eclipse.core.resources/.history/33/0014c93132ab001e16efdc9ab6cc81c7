@@ -1,0 +1,20 @@
+package com.Demo.request;
+
+import lombok.Data;
+
+@Data
+public class PageRequest {
+
+	@Min(0)
+	private int pageNumber;
+
+	@Min(1)
+	private int pageSize;
+
+	private String sortBy = "id";
+
+	private String search;
+
+	
+
+}
