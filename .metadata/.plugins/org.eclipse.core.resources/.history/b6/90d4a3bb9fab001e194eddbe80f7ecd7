@@ -33,7 +33,6 @@ public class TestServiceImpl implements TestService {
 		 testPage.setTestList(allTest);
 		 testPage.setTotalPages(pageTest.getTotalPages());
 		 testPage.setTotalElements(pageTest.getTotalElements());
-		 testPage.setPageNumber(pageTest.getNumber() + 1); // Page numbers are zero-based
 		 testPage.setPageSize(pageTest.getSize());
 		 testPage.setLastPage(pageTest.isLast());
 		 testPage.setFirstPage(pageTest.isFirst());
